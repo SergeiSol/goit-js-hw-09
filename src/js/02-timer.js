@@ -5,12 +5,16 @@ let timerDeadline;
 const refs = {
     button: document.querySelector('button'),
     start: document.querySelector("#datetime-picker"),
+
 };
-refs.button.setAttribute('disabled', 'true')
+refs.button.setAttribute('disabled', 'true'),
+
 
 refs.button.addEventListener('click', () => {
     timer.start(timerRef, timerDeadline);
     refs.button.setAttribute('disabled', 'true')
+    refs.start.setAttribute('disabled', 'true') 
+    
 })
 
 const options = {
@@ -27,6 +31,7 @@ const options = {
       }
       timerDeadline = selectedDates[0];
       refs.button.removeAttribute('disabled')
+
   },
 };
 
@@ -56,7 +61,7 @@ const timer = {
                 //alert("DEADLINE !!!");
                 Report.success("DEADLINE !!!", 'Time off', 'Close');
                 clearInterval(this.intervalId);
-                
+                 refs.start.removeAttribute('disabled') 
                 return;
             }
             this.updateTextContent(roorSelector, data)

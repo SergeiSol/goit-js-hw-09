@@ -13,11 +13,13 @@ ref.form.addEventListener('submit', event => {
 
   for (let i = 1; i <= amount; i += 1, delay += delayStep) {
     createPromise(i, delay)
-      .then(x => {
-        console.log(x);
+      .then(response => {
+        
+        Notify.success(response);
       })
-      .catch(y => {
-        console.log(y);
+      .catch(error => {
+      
+        Notify.failure(error);
       });
   }
 });
@@ -28,10 +30,10 @@ function createPromise(position, delay) {
     const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
       if (shouldResolve) {
-        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
        
       } else {
-        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        reject(`❌ Rejected promise ${position} in ${delay}ms`);
         
       }
     }, delay);
